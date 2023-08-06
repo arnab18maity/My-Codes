@@ -1,45 +1,51 @@
 class Solution {
 public:
-    void solve(int i,int j,vector<vector<int>>& matrix,int m,int n) {
-        for(int a = i-1; a >= 0; a--){
-            matrix[a][j] = 0;
-        }
-         for(int a = i+1; a < m; a++){
-            matrix[a][j] = 0;
-        }
-        
-         for(int a = j-1; a >= 0; a--){
-            matrix[i][a] = 0;
-        }
-        
-         for(int a = j+1; a < n; a++){
-            matrix[i][a] = 0;
-        }
-        
-    }
-    
     void setZeroes(vector<vector<int>>& matrix) {
-        map <pair<int,int>,int> isZero;
         int m = matrix.size();
         int n = matrix[0].size();
         
-        for(int i = 0; i < m ; i++)
+        bool flag1 = false, flag2 = false;
+        
+        for(int i = 0; i < m ; i++){
+            if(matrix[i][0] == 0 ){
+                flag1 = true;
+            }
+        }
+        
+        for(int i = 0; i < n ; i++){
+            if(matrix[0][i] == 0 ){
+                flag2 = true;
+            }
+        }
+        
+        for(int i = 1; i < m ; i++)
         {
             for(int j = 0; j < n; j++){
                 if(matrix[i][j] == 0){
-                    isZero[{i,j}] = 1;
+                    matrix[i][0] = matrix[0][j] = 0;
                 }
             }
         }
         
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
-                if(isZero[{i,j}] == 1){
-                  solve(i,j,matrix,m,n);
+        for(int i = 1; i < m; i++){
+            for(int j = 1; j < n; j++){
+                if(matrix[i][0] == 0 || matrix[0][j] == 0){
+                  matrix[i][j] = 0;
                 }
             }
         }
         
+        if(flag1){
+            for(int i = 0; i < m ; i++){
+               matrix[i][0] = 0;
+            }
+        }
+        
+        if(flag2){
+            for(int i = 0; i < n ; i++){
+              matrix[0][i] = 0;     
+            }
+        }     
         
     }
 };
