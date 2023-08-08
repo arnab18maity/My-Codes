@@ -10,20 +10,6 @@
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode *head)
-    {
-        if(!head || !head -> next)
-        {
-            return head;
-        }
-        
-      ListNode *newHead = reverseList(head -> next);
-      head -> next -> next = head;
-      head -> next = NULL;
-      return newHead; 
-        
-    }
-    
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
       if(!l1 && !l2)
       {
@@ -32,9 +18,9 @@ public:
         
        int v1 = 0, v2 = 0, carry = 0, sum = 0;
         
-       ListNode *head = NULL;
+       ListNode *head = NULL,*tail = NULL;
         
-        while(l1 != NULL || l2 != NULL)
+        while(l1 != NULL || l2 != NULL || carry != 0)
         {
           v1 = 0, v2 = 0, sum = 0;
             
@@ -48,34 +34,27 @@ public:
             
           sum = v1 + v2 + carry;
           carry = sum / 10; 
-          int value = sum % 10;
-          ListNode *newNode = new ListNode(value,NULL);
+          ListNode *newNode = new ListNode(sum % 10,NULL);
             
           if(head == NULL){
              head = newNode;
+             tail = newNode;
           }
+            
           else{  
-           newNode -> next = head;
-           head = newNode;
+            tail -> next = newNode;
+            tail = newNode;
           }
             
           if(l1 != NULL) {
-           l1 = l1 -> next;
+            l1 = l1 -> next;
           }
+            
           if(l2 != NULL) {
-           l2 = l2 -> next;
+            l2 = l2 -> next;
           }
-        }
+      }
         
-        if(carry != 0)
-        {
-          ListNode *newNode = new ListNode(carry,NULL);
-          newNode -> next = head;
-          head = newNode;
-        }
-        
-      ListNode *newHead = reverseList(head);
-        
-      return newHead;
+      return head;
     }
 };
