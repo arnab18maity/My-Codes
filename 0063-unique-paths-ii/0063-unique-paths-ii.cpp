@@ -1,6 +1,6 @@
 class Solution {
 public:
-    /*
+    /* Memoization Solution
     int solve(int i,int j,vector<vector<int>>& grid,vector<vector<int>>& dp) {
            if((i == 0 && j == 0) && grid[i][j] != 1){
                return 1;
@@ -22,7 +22,7 @@ public:
         return dp[i][j] = up+left;
     }
     */
-/*    
+/*  Tabulation Solution  
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         int m = obstacleGrid.size();
         int n = obstacleGrid[0].size();
@@ -59,6 +59,8 @@ public:
 };
 
 */
+
+// Space Optimization Solution
 
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         int m = obstacleGrid.size();
