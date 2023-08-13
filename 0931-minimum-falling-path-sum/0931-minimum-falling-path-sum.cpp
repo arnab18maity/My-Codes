@@ -1,6 +1,8 @@
 class Solution {
 public:
 /*
+     Memoization Solution
+
     int solve(int i,int j,vector<vector<int>>& matrix,int n,vector<vector<int>>& dp) {
         if(i == 0 && (j >= 0 && j < n)){
             return matrix[i][j];
@@ -35,6 +37,9 @@ public:
     }
 };
 */
+/*
+    Tabulation Solution
+    
      int minFallingPathSum(vector<vector<int>>& matrix) {
         int n = matrix.size();
          
@@ -64,6 +69,47 @@ public:
         for(int j = 1; j < n ; j++)
         {
            mini = min(dp[n-1][j],mini);
+        } 
+        
+        return mini;
+    }
+};
+
+*/
+     // Space Optimization
+    
+int minFallingPathSum(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+         
+       vector<int> dp(n,0);
+         
+        for(int j = 0; j < n ; j++)
+        {
+           dp[j] = matrix[0][j];
+        } 
+         
+        for(int i = 1; i < n ; i++)
+        {
+           vector<int> curr(n,0);
+           for(int j = 0; j < n; j++) {
+               int up = INT_MAX;
+               int lD = INT_MAX;
+               int rD = INT_MAX;
+                up = matrix[i][j] + dp[j];    
+                if(j > 0) lD = matrix[i][j] + dp[j-1];   
+                if(j < n-1) rD = matrix[i][j] + dp[j+1];
+        
+               curr[j] = min(up,min(lD,rD));
+           }
+            
+            dp = curr;
+        }
+         
+        int mini = dp[0];
+         
+        for(int j = 1; j < n ; j++)
+        {
+           mini = min(dp[j],mini);
         } 
         
         return mini;
