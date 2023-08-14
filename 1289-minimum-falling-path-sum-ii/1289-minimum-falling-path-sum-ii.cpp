@@ -1,5 +1,6 @@
 class Solution {
 public:
+  /*
     int solve(int i,int j,vector<vector<int>>& grid,int n,vector<vector<int>>& dp){
         if(i == 0 &&(j < n && j >= 0)){
             return grid[i][j];
@@ -37,3 +38,67 @@ public:
         return mini;
     }
 };
+
+*/
+
+
+ int minFallingPathSum(vector<vector<int>>& grid) {
+        int n = grid.size();
+        
+        vector<vector<int>> dp(n,vector<int>(n,INT_MAX));
+     
+        for(int j = 0; j < n; j++)
+        {
+           dp[0][j] = grid[0][j];
+        }
+     
+     for(int i = 1; i < n ; i++){
+         for(int j = 0; j < n ; j++){
+             int ans = INT_MAX;
+            for(int a = 0 ; a < n ; a++){
+              if(a != j) {
+                 int res = grid[i][j] + dp[i-1][a];
+                 ans = min(ans,res);
+              } 
+            }
+             
+             dp[i][j] = ans;
+         }
+         
+     }
+        
+        int mini = INT_MAX;
+     
+        for(int j = 0; j < n; j++){
+            mini = min(mini,dp[n-1][j]);
+        }
+     
+        return mini;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
