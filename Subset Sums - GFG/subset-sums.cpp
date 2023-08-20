@@ -8,16 +8,16 @@ class Solution
 public:
     vector<int> solve(vector<int> &arr,int index,vector<int> &ans,int sum,int N)
     {
-        if(index == N){
+        if(index == -1){
             ans.push_back(sum);
             return ans;
         }
         
         sum += arr[index];
-        solve(arr,index+1,ans,sum,N);
+        solve(arr,index-1,ans,sum,N);
         
         sum -= arr[index];
-        solve(arr,index+1,ans,sum,N);
+        solve(arr,index-1,ans,sum,N);
         
         return ans;
     }
@@ -25,7 +25,7 @@ public:
     vector<int> subsetSums(vector<int> arr, int N)
     {
        vector<int> ans;
-       solve(arr,0,ans,0,N);
+       solve(arr,N-1,ans,0,N);
        return ans;
     }
 };
