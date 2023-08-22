@@ -1,5 +1,6 @@
 class Solution {
 public:
+ /*
     int solve(int index, int n, vector<int> &temp, unordered_map<int,int> &mp, vector<int> &dp) {
         if(index == n) return 0;
         
@@ -17,6 +18,8 @@ public:
         
     }
     
+*/
+    
     int deleteAndEarn(vector<int>& nums) {
         unordered_map<int,int> mp;
         for(int i: nums) mp[i]++;
@@ -25,10 +28,21 @@ public:
         for(auto i : mp) temp.push_back(i.first);
         sort(temp.begin(),temp.end());
         
-        int n = temp.size();  
+        int n = temp.size();          
+        vector<int> dp(n+1,0);
         
-        vector<int> dp(n,-1);
+        int pick = 0, notPick = 0;
         
-        return solve(0,n,temp,mp,dp);
+        for(int i = n-1; i >= 0; i--){
+           notPick = dp[i+1];
+           pick = temp[i]*mp[temp[i]];
+           if(i + 1 < n && temp[i+1] == temp[i] + 1)  pick += dp[i+2];
+           
+           else if(i + 1 < n && temp[i+1] != temp[i] + 1)  pick += dp[i+1];
+            
+           dp[i] = max(pick,notPick);
+        }
+        
+        return dp[0];
     }
 };
