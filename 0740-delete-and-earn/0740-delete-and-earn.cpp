@@ -31,18 +31,19 @@ public:
         int n = temp.size();          
         vector<int> dp(n+1,0);
         
-        int pick = 0, notPick = 0;
+        int pick = 0, notPick = 0, prev1 = 0,prev2 = 0;
         
         for(int i = n-1; i >= 0; i--){
-           notPick = dp[i+1];
+           notPick = prev1;
            pick = temp[i]*mp[temp[i]];
-           if(i + 1 < n && temp[i+1] == temp[i] + 1)  pick += dp[i+2];
+           if(i + 1 < n && temp[i+1] == temp[i] + 1)  pick += prev2;
            
-           else if(i + 1 < n && temp[i+1] != temp[i] + 1)  pick += dp[i+1];
+           else if(i + 1 < n && temp[i+1] != temp[i] + 1)  pick += prev1;
             
-           dp[i] = max(pick,notPick);
+           prev2 = prev1;
+           prev1 = max(pick,notPick);
         }
         
-        return dp[0];
+        return prev1;
     }
 };
