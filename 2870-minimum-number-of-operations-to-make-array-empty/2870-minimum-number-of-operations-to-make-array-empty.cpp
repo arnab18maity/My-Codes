@@ -1,6 +1,6 @@
 class Solution {
 public:
-/*
+/*  Memoization Solution :
     int solve(int ind,vector<int> &nums, vector<int> &dp) {
         if(ind == nums.size()) return 0;
         if(dp[ind] != -1) return dp[ind];
@@ -31,8 +31,11 @@ public:
         
        return ans;
     }
-*/   
-    int minOperations(vector<int>& nums) {
+*/  
+    
+// Tabulation Solution
+    
+int minOperations(vector<int>& nums) {
        sort(nums.begin(),nums.end());
        int n = nums.size();
        vector<int> dp(n,0); 
