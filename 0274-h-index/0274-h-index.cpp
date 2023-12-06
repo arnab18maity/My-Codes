@@ -18,10 +18,10 @@ public:
           
           if(helper(mid,citations)) {
              ans = max(ans,mid); // Can Also return it
-             low++;
+             low = mid + 1;
           }
           else{
-             high--;
+             high = mid - 1;
           }
         }
         
