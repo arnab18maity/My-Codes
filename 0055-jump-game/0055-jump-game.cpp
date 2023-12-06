@@ -1,5 +1,6 @@
 class Solution {
 public:
+   /*
     bool f(int ind, vector<int> &nums, vector<int> &dp) {
        if(ind == nums.size() - 1) return true;
        if(nums[ind] == 0) return false;
@@ -13,10 +14,22 @@ public:
        
         return dp[ind] = false;
     }
-    
+   */ 
     bool canJump(vector<int>& nums) {
       int n = nums.size();
-      vector<int>dp(n,-1);
-      return f(0,nums,dp);
+      vector<int>dp(n,0);
+      dp[n-1] = true;
+        
+      for(int ind = n-2; ind >= 0; ind--) {
+        for(int i = 1; i <= nums[ind]; i++) {
+           bool res = dp[ind+i];
+           if(res) {
+             dp[ind] = true;
+             break;
+           }
+       }   
+      }
+        
+      return dp[0];
     }
 };
