@@ -11,6 +11,21 @@ public:
     }
     
     bool isHappy(int n) {
+     /*
+        Floyd's Cycle Detection Algorithm.
+        If there is a cycle fast & slow will become equal at some point.
+        If there is no cycle fast pointer will give the result 1
+     */
+        int slow = n;
+        int fast = squareSum(n);
+        while(fast != 1 && fast != slow){
+            slow = squareSum(slow);
+            fast = squareSum(squareSum(fast));
+        }
+        return fast == 1;
+    }
+/*    
+    bool isHappy(int n) {
       int temp = n;
       unordered_map<long long,bool> mp;
       mp[temp] = true;
@@ -25,4 +40,5 @@ public:
         
       return false;
     }
+*/
 };
