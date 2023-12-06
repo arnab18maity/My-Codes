@@ -17,7 +17,7 @@ public:
           int mid = (low+high)/2;
           
           if(helper(mid,citations)) {
-             ans = max(ans,mid);
+             ans = max(ans,mid); // Can Also return it
              low++;
           }
           else{
