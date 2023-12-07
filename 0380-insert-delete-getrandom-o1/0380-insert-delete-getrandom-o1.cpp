@@ -17,11 +17,9 @@ public:
     bool remove(int val) {
       if(mp.find(val) == mp.end()) return false;
       int index =  mp[val];
-      /*if(index == nums.size()-1) {
-          nums.pop_back();
-          mp.erase(val);
-          return true;
-      }
+      /*
+       The idea is to swap the last element with the element to be deleted
+       & delete the last element from the set
       */
       int last = nums.back();
       int lastIndex = nums.size()-1;
