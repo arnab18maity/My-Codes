@@ -17,11 +17,12 @@ public:
     bool remove(int val) {
       if(mp.find(val) == mp.end()) return false;
       int index =  mp[val];
-      if(index == nums.size()-1) {
+      /*if(index == nums.size()-1) {
           nums.pop_back();
           mp.erase(val);
           return true;
       }
+      */
       int last = nums.back();
       int lastIndex = nums.size()-1;
       nums[index] = last;
