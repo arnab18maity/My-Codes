@@ -16,22 +16,25 @@ public:
         return dp[ind] = 1 + f(ind-2,word,dp);
     }
  */   
+    
     int removeAlmostEqualCharacters(string word) {
        int n = word.size();
-       vector<int> dp(n+1,0);
-        
+       int curr = 0, prev1 = 0, prev2 = 0;
        for(int ind = 2; ind <= n; ind++) {
            char next = word[ind-2] + 1;
            char prev = word[ind-2] - 1;
 
            if(word[ind-1] != word[ind-2] && word[ind-1] != next && word[ind-1] != prev) {
-              dp[ind] = 0 + dp[ind-1];
+              curr = 0 + prev1;
            }
            else {
-              dp[ind] =  1 + dp[ind-2];
+              curr =  1 + prev2;
            }
+           
+           prev2 = prev1;
+           prev1 = curr;
        }
         
-       return dp[n]; 
+       return prev1; 
     }
 };
