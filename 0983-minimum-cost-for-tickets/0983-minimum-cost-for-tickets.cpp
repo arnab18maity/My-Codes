@@ -1,6 +1,6 @@
 class Solution {
 public:
-/*
+
     int solve(int ind, int expireDay, vector<int>&days, vector<int>&cost, vector<vector<int>> &dp)
     {
         if(ind == 0) {
@@ -28,25 +28,26 @@ public:
     
     int mincostTickets(vector<int>& days, vector<int>& cost) {
        int n = days.size();
-       vector<vector<int>> dp(n,vector<int>(367,-1));
-       return solve(n-1, 366, days, cost, dp); 
+       int lastDay = days[n-1];
+       vector<vector<int>> dp(n,vector<int>(lastDay + 2, -1));
+       return solve(n-1, lastDay+1, days, cost, dp); 
     }
-    
-*/
-    
+
+ /* 
     int mincostTickets(vector<int>& days, vector<int>& cost) {
        int n = days.size();
+       int lastDay = days[n-1];
        //vector<vector<int>> dp(n,vector<int>(367,0));
-       vector<int> prev(367,0), curr(367,0);
+       vector<int> prev(lastDay+2,0), curr(lastDay+2,0);
         
-       for(int j = 0; j <= 366; j++) {
+       for(int j = 0; j <= lastDay+1; j++) {
           if(days[0] < j) {
              prev[j] = min(cost[0],min(cost[1],cost[2]));
           }
        }
         
        for(int ind = 1; ind < n; ind++) {
-          for(int expireDay = 0; expireDay <= 366; expireDay++) {
+          for(int expireDay = 0; expireDay <= lastDay+1; expireDay++) {
               
             if(days[ind] >= expireDay) {
                 curr[expireDay] = 0 + prev[expireDay];
@@ -68,9 +69,9 @@ public:
            prev = curr;
        }
         
-        return prev[366];
+        return prev[lastDay+1];
     }
-
+*/
 };
 
 
