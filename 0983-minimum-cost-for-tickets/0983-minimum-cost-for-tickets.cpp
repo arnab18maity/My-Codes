@@ -64,8 +64,7 @@ public:
                 curr[expireDay] = min(oneDay,min(sevenDay,thirtyDay));
             }
               
-          }
-           
+          }          
            prev = curr;
        }
         
