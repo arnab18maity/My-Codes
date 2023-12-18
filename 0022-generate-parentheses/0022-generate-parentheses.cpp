@@ -1,5 +1,19 @@
 class Solution {
 public:
+    void f1(int open, int close, vector<string> &ans, string cur) {
+       if(open == 0 && close == 0){
+          ans.push_back(cur);
+          return;
+       } 
+        
+       if(open > 0) {
+         f1(open-1, close, ans, cur + '(');  
+       }
+       if(close > open) {
+         f1(open,close-1,ans, cur + ')');
+       }
+    }
+    
     void f(int open, int close, vector<string> &ans, string cur) {
        if(open == 0 && close == 0) {
           ans.push_back(cur);
@@ -36,7 +50,8 @@ public:
         vector<string> ans;
         string cur = "";
 
-        f(n,n,ans,cur);
+        //f(n,n,ans,cur);
+        f1(n,n,ans,cur);
         return ans;
     }
 };
