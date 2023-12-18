@@ -1,5 +1,6 @@
 class Solution {
 public:
+/*
     int solve(int ind, int expireDay, vector<int>&days, vector<int>&cost, vector<vector<int>> &dp)
     {
         if(ind == 0) {
@@ -10,8 +11,10 @@ public:
         
         if(dp[ind][expireDay] != -1) return dp[ind][expireDay];
         
-        if(days[ind] >= expireDay) return dp[ind][expireDay] = 0 + solve(ind-1,expireDay,days,cost, dp);
-    
+        if(days[ind] >= expireDay) {
+            return dp[ind][expireDay] = 0 + solve(ind-1,expireDay,days,cost, dp);
+        }
+        
         int oneDay = cost[0] + solve(ind-1, days[ind], days, cost, dp); 
         
         int d = max(0,days[ind] - 6);
@@ -28,4 +31,102 @@ public:
        vector<vector<int>> dp(n,vector<int>(367,-1));
        return solve(n-1, 366, days, cost, dp); 
     }
+  */
+    
+    int mincostTickets(vector<int>& days, vector<int>& cost) {
+       int n = days.size();
+       vector<vector<int>> dp(n,vector<int>(367,0));
+        
+       for(int j = 0; j <= 366; j++) {
+          if(days[0] < j) {
+             dp[0][j] = min(cost[0],min(cost[1],cost[2]));
+          }
+       }
+        
+       for(int ind = 1; ind < n; ind++) {
+          for(int expireDay = 0; expireDay <= 366; expireDay++) {
+            if(days[ind] >= expireDay) {
+                dp[ind][expireDay] = 0 + dp[ind-1][expireDay];
+            }
+            else {
+                int oneDay = cost[0] + dp[ind-1][days[ind]]; 
+
+                int d = max(0,days[ind] - 6);
+                int sevenDay = cost[1] + dp[ind-1][d];
+
+                d = max(0, days[ind] - 29);
+                int thirtyDay = cost[2] + dp[ind-1][d];
+
+                dp[ind][expireDay] = min(oneDay,min(sevenDay,thirtyDay));
+            }
+          }
+       }
+        
+        return dp[n-1][366];
+    }
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
