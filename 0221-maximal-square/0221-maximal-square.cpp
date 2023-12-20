@@ -1,5 +1,6 @@
 class Solution {
 public:
+/*
     int solve(int i, int j, int m, int n, vector<vector<char>>& matrix, int &maxi, vector<vector<int>> &dp) {
         if(i < 0 || j < 0 || j >= n) {
             return 0;
@@ -32,4 +33,74 @@ public:
         
         return maxi * maxi;       
     }
+*/    
+    
+     int maximalSquare(vector<vector<char>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+        
+        vector<vector<int>> dp(m,vector<int>(n,0));
+        
+        int maxi = 0;
+        
+        for(int i = 0; i < m; i++) {
+          for(int j = 0; j < n; j++) {
+              
+            int left = j > 0 ? dp[i][j-1] : 0;
+            int up = i > 0 ? dp[i-1][j] : 0;
+            int diagonal = i > 0 && j > 0 ? dp[i-1][j-1] : 0;
+
+            if(matrix[i][j] == '1') {
+                int ans = 1 + min(left,min(up,diagonal));
+                maxi = max(ans,maxi);
+                dp[i][j] = ans;
+            }
+            else{
+               dp[i][j] = 0; 
+            }
+          }
+        }
+        
+        return maxi * maxi;       
+    }
+    
+    
+    
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
