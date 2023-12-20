@@ -39,26 +39,28 @@ public:
         int m = matrix.size();
         int n = matrix[0].size();
         
-        vector<vector<int>> dp(m,vector<int>(n,0));
-        
+        //vector<vector<int>> dp(m,vector<int>(n,0));
+        vector<int> prev(n,0), curr(n,0);
         int maxi = 0;
         
         for(int i = 0; i < m; i++) {
           for(int j = 0; j < n; j++) {
               
-            int left = j > 0 ? dp[i][j-1] : 0;
-            int up = i > 0 ? dp[i-1][j] : 0;
-            int diagonal = i > 0 && j > 0 ? dp[i-1][j-1] : 0;
+            int left = j > 0 ? curr[j-1] : 0;
+            int up = prev[j];
+            int diagonal = j > 0 ? prev[j-1] : 0;
 
             if(matrix[i][j] == '1') {
                 int ans = 1 + min(left,min(up,diagonal));
                 maxi = max(ans,maxi);
-                dp[i][j] = ans;
+                curr[j] = ans;
             }
             else{
-               dp[i][j] = 0; 
+               curr[j] = 0; 
             }
           }
+            
+          prev = curr;
         }
         
         return maxi * maxi;       
