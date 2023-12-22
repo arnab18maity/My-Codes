@@ -30,19 +30,17 @@ public:
     }
 */
    bool wordBreak(string s, vector<string>& wordDict) {
-       unordered_map<string,int> mp;
+       unordered_set<string> st(wordDict.begin(), wordDict.end());
        int n = s.size();
-       for(auto it : wordDict) {
-         mp[it]++;  
-       }
        
       // vector<vector<int>> dp(n,vector<int>(n+1,0)); 
-      vector<int> prev(n+1,0);
+      // vector<int> prev(n+1,0), curr(n+1,0);
+      vector<int> prev(n+1,0); 
        
       // Base Case
       for(int space = 1; space <= n; space++) {
          string str = s.substr(0,space - 0);
-          if(mp.find(str) !=  mp.end()) prev[space] = true;
+          if(st.find(str) !=  st.end()) prev[space] = true;
           else prev[space] = false;
       }
        
@@ -50,7 +48,7 @@ public:
           for(int space = ind + 1; space <= n; space++) {
               string str = s.substr(ind,space-ind);
         
-              if(mp.find(str) !=  mp.end()) 
+              if(st.find(str) !=  st.end()) 
                  prev[space] = prev[ind] || prev[space];
 
              else prev[space] = prev[space]; 
