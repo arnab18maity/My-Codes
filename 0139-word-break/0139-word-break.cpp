@@ -37,7 +37,7 @@ public:
        }
        
       // vector<vector<int>> dp(n,vector<int>(n+1,0)); 
-      vector<int> prev(n+1,0), curr(n+1,0);
+      vector<int> prev(n+1,0);
        
       // Base Case
       for(int space = 1; space <= n; space++) {
@@ -55,8 +55,6 @@ public:
 
              else prev[space] = prev[space]; 
           }
-          
-          //prev = curr;
       }       
        
       return prev[n];
