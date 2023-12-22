@@ -36,13 +36,14 @@ public:
          mp[it]++;  
        }
        
-      vector<vector<int>> dp(n,vector<int>(n+1,0)); 
+      // vector<vector<int>> dp(n,vector<int>(n+1,0)); 
+      vector<int> prev(n+1,0), curr(n+1,0);
        
       // Base Case
       for(int space = 1; space <= n; space++) {
          string str = s.substr(0,space - 0);
-          if(mp.find(str) !=  mp.end()) dp[0][space] = true;
-          else dp[0][space] = false;
+          if(mp.find(str) !=  mp.end()) prev[space] = true;
+          else prev[space] = false;
       }
        
       for(int ind = 1; ind < n; ind++) {
@@ -50,13 +51,15 @@ public:
               string str = s.substr(ind,space-ind);
         
               if(mp.find(str) !=  mp.end()) 
-                 dp[ind][space] = dp[ind-1][ind] || dp[ind-1][space];
+                 prev[space] = prev[ind] || prev[space];
 
-             else dp[ind][space] = dp[ind-1][space]; 
+             else prev[space] = prev[space]; 
           }
+          
+          //prev = curr;
       }       
        
-      return dp[n-1][n];
+      return prev[n];
     } 
     
 };
