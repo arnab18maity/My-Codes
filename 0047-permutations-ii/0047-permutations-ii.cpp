@@ -5,13 +5,13 @@ public:
            ans.push_back(nums);
            return;
         }
+          
+        set<int> st; 
          
-        set<int> st;
-        
         for(int j = i; j < nums.size(); j++) {
            // If an element is already visited no need to recompute
            if(st.find(nums[j]) != st.end()) continue;
-            
+           
            st.insert(nums[j]);
            swap(nums[i],nums[j]);
            helper(i+1,nums,ans);
