@@ -1,25 +1,27 @@
 class Solution {
 public:
-     void helper(int i, vector<int>& nums, vector<vector<int>> &ans, set<vector<int>>& st) {
+     void helper(int i, vector<int>& nums, vector<vector<int>> &ans) {
         if(i == nums.size()) {
-           if(st.find(nums) != st.end()) return;
-            
            ans.push_back(nums);
-           st.insert(nums);
            return;
         }
+         
+        set<int> st;
         
         for(int j = i; j < nums.size(); j++) {
+           // If an element is already visited no need to recompute
+           if(st.find(nums[j]) != st.end()) continue;
+            
+           st.insert(nums[j]);
            swap(nums[i],nums[j]);
-           helper(i+1,nums,ans,st);
+           helper(i+1,nums,ans);
            swap(nums[i],nums[j]);
         }
     }
     
     vector<vector<int>> permuteUnique(vector<int>& nums) {
        vector<vector<int>> ans;
-       set<vector<int>> st;
-       helper(0,nums,ans, st);
+       helper(0,nums,ans);
        return ans;
     }
 };
