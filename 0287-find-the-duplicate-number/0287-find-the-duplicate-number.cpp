@@ -1,5 +1,6 @@
 class Solution {
 public:
+/*
     int func(vector<int>& nums, int mid) {
        int count = 0;
        for(int i = 0; i < nums.size(); i++) {
@@ -9,7 +10,8 @@ public:
     }
     
     int findDuplicate(vector<int>& nums) {
-       // Binary Search on Answer        
+       // Binary Search on Answer    TC -> O(NlogN)   SC -> O(1)  
+       
        int low = 1;
        int high = nums.size() - 1;
        while(low <= high) {
@@ -26,8 +28,11 @@ public:
         
        return low;
     }
-/*    
+*/  
+    
     int findDuplicate(vector<int>& nums) {
+      // Tortoise & Hare Algorithm  TC -> O(N)  SC -> O(1)
+        
        int slow = nums[0];
        int fast = nums[nums[0]];
        
@@ -45,7 +50,6 @@ public:
         
        return slow; // We can return fast also
     }
-  */
 };
 
 
