@@ -10,7 +10,7 @@ public:
          int width = dimensions[i][1];
          int area = length * width;
          double diagonal = (double)sqrt((length*length) + (width*width));
-          cout << area << " " << diagonal << endl;
+       
          if(diagonal == maxD) {
             maxArea = max(maxArea,area);
             maxD = diagonal;
