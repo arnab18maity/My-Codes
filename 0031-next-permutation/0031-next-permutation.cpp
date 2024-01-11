@@ -24,8 +24,7 @@ public:
           } 
        }
         
-       swap(nums[index],nums[ind]);
-        
+       swap(nums[index],nums[ind]); 
        reverse(nums.begin() + index + 1, nums.end());
     }
 };
