@@ -18,7 +18,7 @@ public:
         
         return dp[first][last] = max({res1,res2,res3});
     }
-    
+
     int maxOperations(vector<int>& nums) {
       int n = nums.size();
       if(n == 2) return 1;
@@ -26,15 +26,16 @@ public:
       int sumOfFirstTwo = nums[0] + nums[1];
       int sumOfLastTwo = nums[n-1] + nums[n-2];
       int sum0fFirstAndLast = nums[0] + nums[n-1];
-        
+     
       vector<vector<int>>dp1(n+1,vector<int>(n+1,-1));
       vector<vector<int>>dp2(n+1,vector<int>(n+1,-1));
       vector<vector<int>>dp3(n+1,vector<int>(n+1,-1));
       
-      int res1 = 1 + func(sumOfFirstTwo, nums, 2, n-1,dp1);
-      int res2 = 1 + func(sumOfLastTwo, nums, 0, n-3, dp2);
-      int res3 = 1 + func(sum0fFirstAndLast, nums, 1, n-2, dp3);
+      int res1 = func(sumOfFirstTwo, nums, 0, n-1,dp1);
+      int res2 = func(sumOfLastTwo, nums, 0, n-1, dp2);
+      int res3 = func(sum0fFirstAndLast, nums, 0, n-1, dp3);
      
       return max({res1,res2,res3});
+      
     }
 };
