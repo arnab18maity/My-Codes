@@ -12,7 +12,7 @@ public:
        int m = mat.size(), n = mat[0].size();
         
        if(row < 0 || col < 0 || row >= m || col >= n) return;
-       if((row+delRow < 0 || col+delCol < 0) || (row+delRow >= m || col+delCol >= n)) return;
+       if(row+delRow < 0 || col+delCol < 0 || row+delRow >= m || col+delCol >= n) return;
         
        int number =  num + mat[row+delRow][col+delCol];
         
