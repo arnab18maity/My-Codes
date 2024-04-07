@@ -24,13 +24,12 @@ public:
     }
     
     bool checkValidString(string s) {
-  
        int n = s.size();
        vector<vector<int>> dp(n+1,vector<int>(n+1,0));
        dp[n][0] = 1;
         
        for(int ind = n-1; ind >= 0; ind--) {
-           for(int count = 0; count < n; count++) {
+           for(int count = n-1; count >= 0; count--) {
                bool ans = false;
 
                 if(s[ind] == '(') ans |= dp[ind+1][count+1];
@@ -48,29 +47,5 @@ public:
        }
         
        return dp[0][0]; 
-        
-//         vector<vector<int>> dp(s.size()+1, vector<int>(s.size()+1,0));
-//         dp[s.size()][0]=1;
-
-//         for(int ind=s.size()-1; ind>=0; ind--){
-//             for(int openingBracket=0; openingBracket<s.size(); openingBracket++){
-//                 bool ans=false;
-//                 if(s[ind]=='*'){
-//                     ans|=dp[ind+1][openingBracket+1];
-//                     if(openingBracket) ans|=dp[ind+1][openingBracket-1];
-//                     ans|=dp[ind+1][openingBracket];
-//                 }else{
-//                     if(s[ind]=='('){
-//                         ans|=dp[ind+1][openingBracket+1];
-//                     }else{
-//                         if(openingBracket) ans|=dp[ind+1][openingBracket-1];
-//                     }
-//                 }
-
-//                 dp[ind][openingBracket]=ans;
-//             }
-//         }
-
-//         return dp[0][0];
     }
 };
