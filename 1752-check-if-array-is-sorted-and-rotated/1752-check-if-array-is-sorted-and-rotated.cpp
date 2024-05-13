@@ -2,24 +2,16 @@ class Solution {
 public:
     bool check(vector<int>& nums) {
         int n = nums.size(), count = 0;
-        vector<int> temp(nums.begin(),nums.end());
-        sort(temp.begin(),temp.end());
         
         for(int i = 1; i < n; i++) {
             if(nums[i] < nums[i-1]){
-               count = i; 
+               count++; 
             } 
         }
         
-        bool flag = true;
+        // Compare the last & fast element as the array can be rotated
+        if(nums[0] < nums[n-1]) count++;
         
-        for(int i = 0; i < n; i++) {
-            if(temp[i] != nums[(i+count)%n]) {
-              flag = false;
-              break;
-            }
-        }
-        
-        return flag;
+        return count <= 1;
     }
 };
