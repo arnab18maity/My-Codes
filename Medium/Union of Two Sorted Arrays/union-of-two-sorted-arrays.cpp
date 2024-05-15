@@ -12,60 +12,119 @@ class Solution{
     
     vector<int> findUnion(int arr1[], int arr2[], int n, int m)
     {
-        unordered_set<int> st;
         int i = 0, j = 0;
         vector<int> ans;
-        
-        while(i < n && j < m) {
-           if(arr1[i] == arr2[j]) {
-              if(st.find(arr1[i]) == st.end()) {
-                ans.push_back(arr1[i]);
-                st.insert(arr1[i]);
+
+          while (i < n && j < m)
+          {
+            if (arr1[i] == arr2[j])
+            {
+              if (ans.size() == 0 || ans.back() != arr1[i])
+              {
+                ans.push_back(arr1[i]);  
               }
-              
+
               i++;
               j++;
-           }
-           
-           else if(arr1[i] > arr2[j]) {
-              if(st.find(arr2[j]) == st.end()) {
+            }
+
+            else if (arr1[i] > arr2[j])
+            {
+              if (ans.size() == 0 || ans.back() != arr2[j])
+              {
                 ans.push_back(arr2[j]);
-                st.insert(arr2[j]);
               }
               
               j++;
-           }
-           
-           else{
-              if(st.find(arr1[i]) == st.end()) {
+            }
+
+            else
+            {
+              if (ans.size() == 0 || ans.back() != arr1[i])
+              {
                 ans.push_back(arr1[i]);
-                st.insert(arr1[i]);
               }
               
               i++;
-           }
-        }
-        
-        
-        while(i < n) {
-            if(st.find(arr1[i]) == st.end()) {
-                ans.push_back(arr1[i]);
-                st.insert(arr1[i]);
+            }
+          }
+
+          while (i < n)
+          {
+            if (ans.size() == 0 || ans.back() != arr1[i])
+            {
+              ans.push_back(arr1[i]);
             }
               
             i++;
-        }
-        
-        while(j < m) {
-            if(st.find(arr2[j]) == st.end()) {
-                ans.push_back(arr2[j]);
-                st.insert(arr2[j]);
+          }
+
+          while (j < m)
+          {
+            if (ans.size() == 0 || ans.back() != arr2[j])
+            {
+              ans.push_back(arr2[j]);
             }
               
-            j++;  
-        }
+            j++;
+          }
+
+          return ans;
+	    
+        // unordered_set<int> st;
+        // int i = 0, j = 0;
+        // vector<int> ans;
         
-        return ans;
+        // while(i < n && j < m) {
+        //    if(arr1[i] == arr2[j]) {
+        //       if(st.find(arr1[i]) == st.end()) {
+        //         ans.push_back(arr1[i]);
+        //         st.insert(arr1[i]);
+        //       }
+              
+        //       i++;
+        //       j++;
+        //    }
+           
+        //    else if(arr1[i] > arr2[j]) {
+        //       if(st.find(arr2[j]) == st.end()) {
+        //         ans.push_back(arr2[j]);
+        //         st.insert(arr2[j]);
+        //       }
+              
+        //       j++;
+        //    }
+           
+        //    else{
+        //       if(st.find(arr1[i]) == st.end()) {
+        //         ans.push_back(arr1[i]);
+        //         st.insert(arr1[i]);
+        //       }
+              
+        //       i++;
+        //    }
+        // }
+        
+        
+        // while(i < n) {
+        //     if(st.find(arr1[i]) == st.end()) {
+        //         ans.push_back(arr1[i]);
+        //         st.insert(arr1[i]);
+        //     }
+              
+        //     i++;
+        // }
+        
+        // while(j < m) {
+        //     if(st.find(arr2[j]) == st.end()) {
+        //         ans.push_back(arr2[j]);
+        //         st.insert(arr2[j]);
+        //     }
+              
+        //     j++;  
+        // }
+        
+        // return ans;
     }
 };
 
