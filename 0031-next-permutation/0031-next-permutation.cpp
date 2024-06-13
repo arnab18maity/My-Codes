@@ -1,30 +1,28 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-       int index = -1;
-       for(int i = nums.size() - 2; i >= 0; i--) {
-           if(nums[i] < nums[i+1]) {
-               index = i;
-               break;
-           }
-       }
+      int breakPoint = -1;
+      int n = nums.size();
         
-       if(index == -1) {
-         reverse(nums.begin(),nums.end());
-         return;
-       }
+      for(int i = n-2; i >= 0; i--) {
+         if(nums[i] < nums[i+1]) {
+            breakPoint = i;
+            break;
+         }
+      }
         
-       int element = INT_MAX;
-       int ind = -1;
-       for(int i = nums.size() - 1; i > index; i--) {
-          if(nums[i] > nums[index]) {
-             element = nums[i];
-             ind = i;
-             break;
-          } 
-       }
+      if(breakPoint == -1) {
+        reverse(nums.begin(),nums.end());
+        return;
+      }
         
-       swap(nums[index],nums[ind]); 
-       reverse(nums.begin() + index + 1, nums.end());
+      for(int i = n-1; i > breakPoint; i--) {
+         if(nums[i] > nums[breakPoint]) {
+            swap(nums[i],nums[breakPoint]);
+            break;
+         }
+      }
+        
+      reverse(nums.begin() + breakPoint + 1, nums.end());
     }
 };
