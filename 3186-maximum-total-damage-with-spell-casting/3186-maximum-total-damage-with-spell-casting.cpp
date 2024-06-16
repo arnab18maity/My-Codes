@@ -92,16 +92,25 @@ public:
        sort(unique.begin(), unique.end());
        int n = unique.size();
         
-       vector<int> nextIndex(n,n); // Set all the next Index to n at the beginning
+       vector<int> nextIndex(n,-1);
         
        for(int i = 0; i < n; i++) {
          nextIndex[i] = lower_bound(unique.begin(), unique.end(), unique[i] + 3) -
                         unique.begin();
        }
         
-       vector<long long> dp(n, -1);
+       // vector<long long> dp(n, -1);        
+       // return helper(0, unique, nextIndex, mp, dp);
         
-       return helper(0, unique, nextIndex, mp, dp);
+       vector<long long> dp(n+1, 0);
+        
+       for(int ind = n-1; ind >= 0; ind--) {
+          long long notTake = dp[ind+1];   
+          long long take = (1ll*unique[ind]*(mp[unique[ind]]) + 1ll*dp[nextIndex[ind]]);
+          dp[ind] = max(take, notTake); 
+       }
+        
+       return dp[0];
     }
 };
 
