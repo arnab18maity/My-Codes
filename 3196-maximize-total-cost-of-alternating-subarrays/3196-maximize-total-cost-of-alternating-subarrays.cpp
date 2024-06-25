@@ -32,72 +32,32 @@ public:
        // vector<vector<long long>> dp(n, vector<long long>(2,-1));
        // return helper(0, true, nums, dp); 
         
-       vector<vector<long long>> dp(n+1, vector<long long>(2,0));
+       // vector<vector<long long>> dp(n+1, vector<long long>(2,0));
+        
+       vector<long long> curr(2,0), prev(2,0);
         
        for(int ind = n-1; ind >= 0; ind--) {
            for(int flag = 0; flag < 2; flag++) {
                long long oldCost = 0;
         
                if(flag) {
-                 oldCost = nums[ind] + dp[ind+1][0];
+                 oldCost = nums[ind] + prev[0];
                }
                else{
-                 oldCost = -nums[ind] + dp[ind+1][1];   
+                 oldCost = -nums[ind] + prev[1];   
                }
 
-               long long newCost = nums[ind] + dp[ind+1][0];
+               long long newCost = nums[ind] + prev[0];
 
-               dp[ind][flag] = max(oldCost,newCost);
+               curr[flag] = max(oldCost,newCost);
            }
+           
+           prev = curr;
        }
               
-       return dp[0][1];    
+        return prev[1];    
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
