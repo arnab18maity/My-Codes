@@ -4,13 +4,18 @@ public:
        if(curr == num) return 0;
        if(curr > num) return 1e7;
         
-       int copy = (curr != clip) ? 1 + solve(curr, curr, num) : 1e7;
-       int paste = (clip > 0) ? 1 + solve(curr + clip, clip, num) : 1e7;
+       // Paste
+       int paste = 1 + solve(curr + clip, clip, num);
         
-       return min(copy,paste);
+       // Copy & Paste  // There is no point of only copying
+       int copyandpaste = 2 + solve(curr+curr, curr, num);
+       
+        
+       return min(copyandpaste,paste);
     }
     
     int minSteps(int n) {
-       return solve(1,0,n); 
+       if(n == 1) return 0;
+       return 1 + solve(1,1,n); 
     }
 };
