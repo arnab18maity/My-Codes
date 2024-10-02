@@ -7,7 +7,7 @@ public:
        // Paste
        int paste = 1 + solve(curr + clip, clip, num);
         
-       // Copy & Paste  // There is no point of only copying
+       // Copy & Paste  // There is no point of only copying, we need to paste it also
        int copyandpaste = 2 + solve(curr+curr, curr, num);
        
         
