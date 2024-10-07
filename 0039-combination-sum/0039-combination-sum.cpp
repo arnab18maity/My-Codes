@@ -1,5 +1,6 @@
 class Solution {
 public:
+    
     vector<vector<int>> combinations;
     
     void solve(int ind, int target, vector<int>& candidates, vector<int> &ans) {
@@ -27,14 +28,9 @@ public:
     
     
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-       //set<vector<int>> st;
        vector<int> ans;
        
        solve(0,target, candidates, ans);
-        
-       // for(auto it : st) {
-       //    combinations.push_back(it);
-       // }
         
        return combinations;
     }
