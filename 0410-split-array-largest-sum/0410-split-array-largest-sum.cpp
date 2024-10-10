@@ -20,20 +20,24 @@ int findPages(vector<int>& arr, int n, int m) {
     if(m > n) return -1;
     int low = *max_element(arr.begin(), arr.end());
     int high = accumulate(arr.begin(), arr.end(), 0); 
+    int ans = INT_MAX;
+    
 
     while(low <= high) {
-       int mid = low + (high-low)/2;
-       int res = helper(arr,mid);
-       
-        if(res > m) {
-          low = mid + 1;
-        }
-        else{
+        int mid = low + (high-low)/2;
+        
+        int res = helper(arr,mid);
+        
+        if(res <=  m) {
+          ans = mid;
           high = mid - 1;
+        }
+        else {
+          low = mid + 1;
         }
     }
 
-    return low;
+    return ans;
 }
 
     int splitArray(vector<int>& nums, int k) {
