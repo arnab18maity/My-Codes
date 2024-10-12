@@ -9,64 +9,38 @@
  * };
  */
 class Solution {
-public:
-    ListNode *reverse(ListNode *head) {
-       if(!head || !head -> next) return head;
-       ListNode *prev = NULL, *curr = head;
+public:   
+    ListNode* rotateRight(ListNode* head, int k) {
+       if(!head || !head -> next || k == 0) return head;
         
-        while(curr) {
-           ListNode *temp = curr -> next;
-           curr -> next = prev;
-           prev = curr;
-           curr = temp;
+       int len = 1;
+        
+       ListNode *tail = head;
+        
+        while(tail -> next) {
+           tail = tail -> next;
+           len++;
         }
         
-        return prev;
-    }
-    
-    int size(ListNode *head) {
-       if(!head) return 0;
-       ListNode *curr = head;
-       int count = 0;
-       
-       while(curr) {
-         count++;
-         curr = curr -> next;
-       }
-        
-       return count;
-    }
-    
-    ListNode* rotateRight(ListNode* head, int k) {
-        if(!head || !head -> next || k == 0) return head;
-        
-        int s = size(head);
-        
-        k = k % s;
+        k = k % len;
         
         if(k == 0) return head;
         
-        ListNode *newHead = reverse(head);
-        int count = 1;
-        ListNode *temp = newHead;
+        tail -> next = head;
         
-        while(count < k) {
+        int val = len - k;
+        
+        int count = 1;
+        ListNode *temp = head;
+        
+        while(count < val) {
            temp = temp -> next;
            count++;
         }
         
-        ListNode *rightPart = temp -> next;
+        ListNode *newHead = temp -> next;
         temp -> next = NULL;
         
-        ListNode *leftHead = reverse(newHead);
-        ListNode *rightHead = reverse(rightPart);
-        
-        temp = leftHead;
-        
-        while(temp -> next) temp = temp -> next;
-        
-        temp -> next = rightHead;
-        
-        return leftHead;
+        return newHead;
     }
 };
